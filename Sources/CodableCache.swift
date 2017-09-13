@@ -10,13 +10,13 @@ import Foundation
 
 public struct CodableCache<T: Codable> {
     
-    private let encoder: JSONEncoder
-    private let decoder: JSONDecoder
+    let encoder: JSONEncoder
+    let decoder: JSONDecoder
     
-    private let memoryCache: NSCache<AnyObject, AnyObject>
-    private let persistentCache: PersistentCache<T>
+    let memoryCache: NSCache<AnyObject, AnyObject>
+    let persistentCache: PersistentCache<T>
     
-    private let key: AnyHashable
+    let key: AnyHashable
     
     public init(key: AnyHashable, encoder: JSONEncoder = JSONEncoder(), decoder: JSONDecoder = JSONDecoder()) {
         self.key = key
