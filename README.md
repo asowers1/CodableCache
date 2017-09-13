@@ -1,6 +1,5 @@
-<center>
+
 ![CodableCacheLogo](CodableCache.png)
-</center>
 <br>
 <br>
 
