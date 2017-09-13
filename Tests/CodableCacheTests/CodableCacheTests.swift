@@ -43,10 +43,10 @@ class CodableCacheTests: XCTestCase {
         testData = TestData(testing: [1, 2, 3])
         
         codableCache = CodableCache<TestData>(key: "com.something.interesting", encoder: encoder, decoder: decoder)
+        codableCache.clear()
     }
     
     func testCodable() {
-        
         let payload: Data
         do {
             payload = try encoder.encode(testData)
@@ -67,9 +67,8 @@ class CodableCacheTests: XCTestCase {
     }
     
     func testCodableMemoryCache() {
-        
         do {
-            try codableCache.set(testData)
+            try codableCache.set(value: testData)
         } catch {
             XCTFail()
             return
@@ -87,9 +86,8 @@ class CodableCacheTests: XCTestCase {
     }
     
     func testCodablePersistentCache() {
-       
         do {
-            try codableCache.set(testData)
+            try codableCache.set(value: testData)
         } catch {
             XCTFail()
             return
@@ -107,5 +105,48 @@ class CodableCacheTests: XCTestCase {
         
         XCTAssert(testData == unwrappedTestData)
     }
+    
+    func testJSONPersistence() {
+        let json = """
+            {
+                "testing": [
+                    1,
+                    2,
+                    3
+                ]
+            }
+        """
+        
+        guard let data = json.data(using: .utf8) else {
+            XCTFail()
+            return
+        }
+        
+        let decodedTestData: TestData
+        do {
+            decodedTestData = try decoder.decode(TestData.self, from: data)
+            XCTAssert(type(of: decodedTestData) == TestData.self)
+            try codableCache.set(value: decodedTestData)
+            let newCodableCache = CodableCache<TestData>(key: "com.something.interesting")
+            let otherDecodedTestData = try newCodableCache.get()
+            XCTAssert(otherDecodedTestData == decodedTestData)
+            
+        } catch {
+            XCTFail()
+            return
+        }
+    }
+    
+    func testAbsenseOfValue() {
+        let someCache = CodableCache<TestData>(key: "com.bogus.key")
+        do {
+            let _ = try someCache.get()
+            XCTFail("You should haven gotten an error and thrown by now")
+        } catch {
+            let error = error as? CodableCacheError<TestData>
+            XCTAssertNotNil(error)
+        }
+    }
+    
     
 }
