@@ -1,7 +1,7 @@
 
 ![alt text][logo]
 
-[logo]: https://github.com/asowers1/CodableCache/raw/master/src/common/images/CodableCache.pdf "CodableCache Logo"
+[logo]: https://github.com/asowers1/CodableCache/blob/master/CodableCache.png "CodableCache Logo"
 
 # CodableCache
 
