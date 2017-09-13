@@ -10,15 +10,15 @@ import Foundation
 import XCTest
 import CodableCache
 
-struct TestData: Codable {
-    let testing: [Int]
-}
-
-func ==(lhs: TestData, rhs: TestData) -> Bool {
-    return lhs.testing == rhs.testing
-}
-
 class CodableCacheTests: XCTestCase {
+    
+    struct TestData: Codable {
+        let testing: [Int]
+    }
+    
+    func ==(lhs: TestData, rhs: TestData) -> Bool {
+        return lhs.testing == rhs.testing
+    }
     
     var encoder = JSONEncoder()
     var decoder = JSONDecoder()

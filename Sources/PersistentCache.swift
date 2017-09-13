@@ -23,7 +23,7 @@ struct PersistentCache<T: Codable> {
         self.decoder = decoder
         self.fileManager = FileManager.default
         let cachesDirectory = self.fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first!
-        self.cacheDirectory = cachesDirectory.appendingPathComponent(key.description)
+        self.cacheDirectory = cachesDirectory.appendingPathComponent(String(key.description))
         self.key = key
     }
     
@@ -34,7 +34,7 @@ struct PersistentCache<T: Codable> {
 
 extension PersistentCache {    
     func filePathForKey(_ key: AnyHashable) -> String {
-        return self.cacheDirectory.appendingPathComponent(key.description).path
+        return self.cacheDirectory.appendingPathComponent(String(key.description)).path
     }
 }
 

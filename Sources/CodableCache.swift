@@ -33,7 +33,7 @@ public struct CodableCache<T: Codable> {
 extension CodableCache {
     
     public func get() throws -> T {
-        if let data = self.memoryCache.object(forKey: self.key.description as AnyObject) as? Data {
+        if let data = self.memoryCache.object(forKey: self.key.hashValue as AnyObject) as? Data {
             return try decoder.decode(T.self, from: data)
         } else {
             return try self.persistentCache.get(self.key)
@@ -42,7 +42,7 @@ extension CodableCache {
     
     public func set(_ value: T) throws {
         let archivedValue = try! encoder.encode(value)
-        self.memoryCache.setObject(archivedValue as AnyObject, forKey: self.key.description as AnyObject)
+        self.memoryCache.setObject(archivedValue as AnyObject, forKey: self.key.hashValue as AnyObject)
         try self.persistentCache.set(value, forKey: self.key)
     }
     
