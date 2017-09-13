@@ -1,7 +1,7 @@
 <center>
-![CodableCache Logo](http://asowers.net/wp-content/uploads/2017/09/CodableCache.png)
+![CodableCacheLogo](http://asowers.net/wp-content/uploads/2017/09/CodableCache.png)
 </center>
-
+<br>
 <br>
 
 ![Platforms](https://img.shields.io/badge/platforms-iOS%20|%20watchOS%20|%20macOS%20|%20tvOS-blue.svg)
