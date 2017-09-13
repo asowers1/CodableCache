@@ -10,13 +10,13 @@ import Foundation
 
 struct PersistentCache<T: Codable> {
     
-    private let encoder: JSONEncoder
-    private let decoder: JSONDecoder
+    let encoder: JSONEncoder
+    let decoder: JSONDecoder
     
-    private let fileManager: FileManager
-    private let cacheDirectory: URL
+    let fileManager: FileManager
+    let cacheDirectory: URL
 
-    private let key: AnyHashable
+    let key: AnyHashable
     
     init(key: AnyHashable, encoder: JSONEncoder, decoder: JSONDecoder) {
         self.encoder = encoder
