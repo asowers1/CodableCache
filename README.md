@@ -1,5 +1,5 @@
 <center>
-![CodableCacheLogo](https://raw.githubusercontent.com/asowers1/CodableCache/master/CodableCache.png)
+![CodableCacheLogo](CodableCache.png)
 </center>
 <br>
 <br>
