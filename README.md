@@ -1,6 +1,5 @@
 <center>
-![CodableCache Logo](http://asowers.net/wp-content/uploads/2017/09/CodableCache.svg)
-
+![CodableCache Logo](http://asowers.net/wp-content/uploads/2017/09/CodableCache.png)
 </center>
 
 <br>
