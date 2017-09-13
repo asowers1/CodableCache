@@ -1,5 +1,5 @@
 <center>
-![CodableCacheLogo](http://asowers.net/wp-content/uploads/2017/09/CodableCache.png?raw=true)
+![](images/CodableCache.png?raw=true)
 </center>
 <br>
 <br>

@@ -1,14 +1,15 @@
 Pod::Spec.new do |s|
   s.name         = "CodableCache"
   s.version      = "0.1"
-  s.summary      = ""
+  s.summary      = "A memory and disk based cache backed by the Swift 4 Codable protocol."
   s.description  = <<-DESC
-    Your description here.
+    What is Codable Cache? It's a framework that allows for seamless memory caching and disk persistence of your plain old Swift structs.
+    Simply define a model and conform to Encodable – you're ready to use Codable Cache.
   DESC
   s.homepage     = "https://github.com/asowers1/CodableCache.git"
   s.license      = { :type => "MIT", :file => "LICENSE" }
   s.author             = { "Andrew Sowers" => "asow123@gmail.com" }
-  s.social_media_url   = ""
+  s.social_media_url   = "https://twitter.com/andrewsowers"
   s.ios.deployment_target = "8.0"
   s.osx.deployment_target = "10.9"
   s.watchos.deployment_target = "2.0"
