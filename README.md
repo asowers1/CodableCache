@@ -1,4 +1,4 @@
-[logo]: https://github.com/asowers1/CodableCache/blob/master/CodableCache.png?raw=true "CodableCache Logo"
+[logo]: https://github.com/asowers1/CodableCache/blob/master/CodableCache.svg?raw=true "CodableCache Logo"
 
 <center>
 ![alt text][logo]
