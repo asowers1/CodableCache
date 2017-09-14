@@ -33,7 +33,7 @@ struct PersistentCache<T: Codable> {
 // MARK - Filemanager helpers
 
 extension PersistentCache {    
-    func filePathForKey(_ key: AnyHashable) -> String {
+    public func filePathForKey(_ key: AnyHashable) -> String {
         return self.cacheDirectory.appendingPathComponent(String(key.description)).path
     }
 }
