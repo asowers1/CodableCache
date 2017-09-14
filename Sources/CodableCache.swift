@@ -32,7 +32,7 @@ public struct CodableCache<T: Codable> {
 // MARK - Filemanager helpers
 
 extension CodableCache {
-    public func filePathForKey(_ key: AnyHashable) -> String {
+    public func filePathForKey() -> String {
         return self.persistentCache.filePathForKey(key)
     }
 }

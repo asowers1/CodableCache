@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "CodableCache"
-  s.version      = "0.0.3"
+  s.version      = "0.0.4"
   s.summary      = "A memory and disk based cache backed by the Swift 4 Codable protocol."
   s.description  = <<-DESC
     What is Codable Cache? It's a framework that allows for seamless memory caching and disk persistence of your plain old Swift structs.
