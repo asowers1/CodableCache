@@ -39,15 +39,15 @@ struct Person: Codable {
 final class PersonManager {
 
     let cache: CodableCache<Person>
-    
+
     init(cacheKey: AnyHashable) {
         cache = CodableCache<Person>(key: cacheKey)
     }
 
     func getPerson() throws -> Person {
-        cache.get()
+        return cache.get()
     }
-    
+
     func set(person: Person) throws {
         cache.set(value: person)
     }
@@ -62,28 +62,35 @@ final class PersonManager {
 
 ```swift
 
-        let json = """
-            {
-                "testing": [
-                    1,
-                    2,
-                    3
-                ]
-            }
-        """
-        
-        guard let data = json.data(using: .utf8) else {
-            return
+struct TestData: Codable {
+  let testing: [Int]
+}
+
+func saveJSON() {
+
+    let json = """
+        {
+            "testing": [
+                1,
+                2,
+                3
+            ]
         }
-        
-        let decodedTestData: TestData
-        do {
-            decodedTestData = try decoder.decode(TestData.self, from: data)
-            try codableCache.set(value: decodedTestData)
-        } catch {
-            doErrorStuff()
-            return
-        }
+    """
+
+    guard let data = json.data(using: .utf8) else {
+        return
+    }
+
+    let decodedTestData: TestData
+    do {
+        decodedTestData = try decoder.decode(TestData.self, from: data)
+        try codableCache.set(value: decodedTestData)
+    } catch {
+        // do something else
+        return
+    }
+}
 
 ```
 
@@ -101,22 +108,22 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationC
     let appSettings = CodableCache<Settings>(key: "com.myApp.settings")
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
+
         do {
             let settings = try appSettings.get()
             doSomethingUseful(with: settings)
         } catch {
             // do something else
         }
-        
+
         return true
     }
-    
+
     // ...
 }
 
 ```
-        
+
 
 ## 💻 🚀 Installation
 
@@ -152,4 +159,3 @@ Feel free to open and issue or pull request – I would be happy to help.
 ## 👩‍🔧 👨‍🔧 Authors and Contributors
 
 [Andrew Sowers](http://asowers.net)
-
