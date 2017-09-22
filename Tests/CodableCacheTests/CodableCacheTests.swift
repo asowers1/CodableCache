@@ -148,5 +148,34 @@ class CodableCacheTests: XCTestCase {
         }
     }
     
+    func testNestedValues() {
+        
+        struct Foo: Codable {
+            
+            struct Bar: Codable {
+                let hello: String
+            }
+            
+            let bar: Bar
+            
+        }
+        
+        let foo = Foo(bar: Foo.Bar(hello: "world"))
+        
+        let cache = CodableCache<Foo>(key: "FooBar")
+        
+        do {
+            try cache.set(value: foo)
+            
+            let foo2 = try CodableCache<Foo>(key: "FooBar").get()
+            
+            XCTAssert(foo.bar.hello == foo2.bar.hello)
+            
+        } catch {
+            XCTFail()
+        }
+        
+    }
+    
     
 }
