@@ -17,7 +17,7 @@
 
 
 # 📦📲 CodableCache
-What is `CodableCache`? It's a framework that allows for seamless memory caching and disk persistence of your plain old Swift structs. Simply define a model and conform to [Encodable](https://developer.apple.com/documentation/swift/encodable) – you're ready to use `CodableCache`.
+What is `CodableCache`? It's a framework that allows for seamless memory caching and disk persistence of your plain old Swift structs. Simply define a model and conform to [Codable](https://developer.apple.com/documentation/swift/codable) – you're ready to use `CodableCache`.
 
 # 🎓📕 Some History
 Codable Cache is a drop in replacement for my [LeanCache](https://github.com/asowers1/LeanCache) framework, which was backed by specifying generic types conforming to `NSCoding`. It afforded workflows like `let x: NSNumber? = Cache<NSNumber>("some interesting key")` and that's still great, but writing serializers for `NSCoding` is a pain. Hence, `CodableCache` was born.
@@ -162,3 +162,5 @@ Feel free to open an issue or pull request – I would be happy to help.
 ## 👩‍🔧 👨‍🔧 Authors and Contributors
 
 [Andrew Sowers](http://asowers.net)
+
+
