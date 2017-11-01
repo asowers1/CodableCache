@@ -124,6 +124,22 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationC
 
 ```
 
+##### Specify a different storage directory:
+
+```swift
+import CodableCache
+
+struct Person: Codable {
+    let name: String
+    let age: Double
+}
+
+// this data will not be purged by the system like .cachesDirectory would
+let persistentPersonStorage = CodableCache<Person>(key: "myPerson", directory: .applicationSupportDirectory)
+
+
+```
+
 ## 👩‍🔬 👨‍🎨 Philosophy
 
 Using something heavyweight like CoreData, Realm, or SQLite is often overkill. More often than not we're just backing up some local state based on some JSON interface – using a spaceship for a walk down the block 🚀. Typically, we display this data to the user if it isn't stale and update it from the network if need be. Sorting and reordering is often a server side task, so relational databases and object graphs might be too expensive in terms of upstart modeling and your management time. With `CodableCache` we take a different approach by allowing you to quickly define models, skip boilerplate / serializers, and start saving your data at a lightning pace.
