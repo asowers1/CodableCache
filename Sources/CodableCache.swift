@@ -18,10 +18,18 @@ public struct CodableCache<T: Codable> {
     
     let key: AnyHashable
     
-    public init(key: AnyHashable, encoder: JSONEncoder = JSONEncoder(), decoder: JSONDecoder = JSONDecoder()) {
+    public init(key: AnyHashable,
+                encoder: JSONEncoder = JSONEncoder(),
+                decoder: JSONDecoder = JSONDecoder(),
+                directory: FileManager.SearchPathDirectory = .cachesDirectory,
+                searchPathDomainMask: FileManager.SearchPathDomainMask = .userDomainMask) {
         self.key = key
         self.memoryCache = NSCache<AnyObject, AnyObject>()
-        self.persistentCache = PersistentCache<T>(key: key, encoder: encoder, decoder: decoder)
+        self.persistentCache = PersistentCache<T>(key: key,
+                                                  encoder: encoder,
+                                                  decoder: decoder,
+                                                  directory: directory,
+                                                  searchPathDomainMask: searchPathDomainMask)
         self.encoder = encoder
         self.decoder = decoder
     }

@@ -18,11 +18,11 @@ struct PersistentCache<T: Codable> {
 
     let key: AnyHashable
     
-    init(key: AnyHashable, encoder: JSONEncoder, decoder: JSONDecoder) {
+    init(key: AnyHashable, encoder: JSONEncoder, decoder: JSONDecoder, directory: FileManager.SearchPathDirectory, searchPathDomainMask: FileManager.SearchPathDomainMask) {
         self.encoder = encoder
         self.decoder = decoder
         self.fileManager = FileManager.default
-        let cachesDirectory = self.fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first!
+        let cachesDirectory = self.fileManager.urls(for: directory, in: searchPathDomainMask).first!
         self.cacheDirectory = cachesDirectory.appendingPathComponent(String(key.description))
         self.key = key
     }
