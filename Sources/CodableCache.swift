@@ -48,12 +48,16 @@ extension CodableCache {
 // MARK: - Cacher operations
 extension CodableCache {
     
-    public func get() throws -> T {
-        if let data = self.memoryCache.object(forKey: self.key.hashValue as AnyObject) as? Data {
-            return try decoder.decode(T.self, from: data)
-        } else {
-            return try self.persistentCache.get(self.key)
+    public func get() -> T? {
+        guard let data = self.memoryCache.object(forKey: self.key.hashValue as AnyObject) as? Data else {
+            return self.persistentCache.get(self.key)
         }
+        
+        guard let decoded = try? decoder.decode(T.self, from: data) else {
+            return nil
+        }
+        
+        return decoded
     }
     
     public func set(value: T) throws {
@@ -62,9 +66,9 @@ extension CodableCache {
         try self.persistentCache.set(value, forKey: self.key)
     }
     
-    public func clear() {
+    public func clear() throws {
         self.memoryCache.removeAllObjects()
-        self.persistentCache.clear()
+        try self.persistentCache.clear()
     }
     
     

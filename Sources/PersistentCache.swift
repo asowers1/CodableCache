@@ -42,25 +42,26 @@ extension PersistentCache {
 
 extension PersistentCache {
     
-    func get(_ key: AnyHashable) throws -> T {
+    public func get(_ key: AnyHashable) -> T? {
         guard let data = NSKeyedUnarchiver.unarchiveObject(withFile: self.filePathForKey(key)) as? Data else {
-            throw CodableCacheError<T>.valueNotFound(withKey: key)
+            return nil
         }
-        return try decoder.decode(T.self, from: data)
+        
+        guard let decoded = try? decoder.decode(T.self, from: data) else {
+            return nil
+        }
+
+        return decoded
     }
     
-    func set(_ value: T, forKey key: AnyHashable)  throws {
+    public func set(_ value: T, forKey key: AnyHashable) throws {
         let data = try encoder.encode(value)
         try self.fileManager.createDirectory(at: self.cacheDirectory, withIntermediateDirectories: true, attributes: nil)
         NSKeyedArchiver.archiveRootObject(data, toFile: self.filePathForKey(key))
     }
     
-    func clear() {
-        do {
-            try self.fileManager.removeItem(at: self.cacheDirectory)
-        } catch _ {
-        }
+    public func clear() throws {
+        try self.fileManager.removeItem(at: self.cacheDirectory)
     }
-    
-    
+
 }
