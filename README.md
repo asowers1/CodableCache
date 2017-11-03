@@ -109,7 +109,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationC
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-        if let settings = try appSettings.get() {
+        if let settings = appSettings.get() {
             doSomethingUseful(with: settings)
         }
 
