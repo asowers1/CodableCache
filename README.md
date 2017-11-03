@@ -44,7 +44,7 @@ final class PersonManager {
         cache = CodableCache<Person>(key: cacheKey)
     }
 
-    func getPerson() throws -> Person {
+    func getPerson() -> Person? {
         return cache.get()
     }
 
@@ -109,11 +109,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationC
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-        do {
-            let settings = try appSettings.get()
+        if let settings = try appSettings.get() {
             doSomethingUseful(with: settings)
-        } catch {
-            // do something else
         }
 
         return true
