@@ -137,6 +137,38 @@ let persistentPersonStorage = CodableCache<Person>(key: "myPerson", directory: .
 
 ```
 
+##### Creating a generic cache:
+
+```swift
+import CodableCache
+
+final class GenericCache<Cacheable: Codable> {
+
+    let cache: CodableCache<Cacheable>
+
+    init(cacheKey: AnyHashable) {
+        self.cache = CodableCache<Cacheable>(key: cacheKey)
+    }
+
+    func get() -> Cacheable? {
+        return self.cache.get()
+    }
+
+    func set(value: Cacheable) throws {
+        try self.cache.set(value: value)
+    }
+
+    func clear() throws {
+        try self.cache.clear()
+    }
+}
+```
+
+##### And later use it like so:
+```swift
+let myCache = GenericCache<MyType>(cacheKey: String(describing: MyType.self))
+```
+
 ## 👩‍🔬 👨‍🎨 Philosophy
 
 Using something heavyweight like CoreData, Realm, or SQLite is often overkill. More often than not we're just backing up some local state based on some JSON interface – using a spaceship for a walk down the block 🚀. Typically, we display this data to the user if it isn't stale and update it from the network if need be. Sorting and reordering is often a server side task, so relational databases and object graphs might be too expensive in terms of upstart modeling and your management time. With `CodableCache` we take a different approach by allowing you to quickly define models, skip boilerplate / serializers, and start saving your data at a lightning pace.
