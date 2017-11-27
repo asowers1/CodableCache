@@ -8,9 +8,9 @@
 ![Platforms](https://img.shields.io/badge/platforms-iOS%20|%20watchOS%20|%20macOS%20|%20tvOS-blue.svg)
 ![Languages](https://img.shields.io/badge/languages-Swift%204-orange.svg)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-green.svg?style=flat)][Carthage]
-[![Cocoapods compatible](https://img.shields.io/badge/Cocoapods-compatible-green.svg
-)][Cocoapods]
+[![Cocoapods compatible](https://img.shields.io/badge/Cocoapods-compatible-green.svg)][Cocoapods]
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
+
 [Carthage]: https://github.com/carthage/carthage
 [Cocoapods]: https://cocoapods.org
 
