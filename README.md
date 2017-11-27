@@ -4,7 +4,6 @@
 
 <br>
 
-<p align="center">
 ![](https://travis-ci.org/asowers1/CodableCache.svg?branch=master)
 ![Platforms](https://img.shields.io/badge/platforms-iOS%20|%20watchOS%20|%20macOS%20|%20tvOS-blue.svg)
 ![Languages](https://img.shields.io/badge/languages-Swift%204-orange.svg)
@@ -14,7 +13,6 @@
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 [Carthage]: https://github.com/carthage/carthage
 [Cocoapods]: https://cocoapods.org
-<p>
 
 # 📦📲 CodableCache
 What is `CodableCache`? It's a framework that allows for seamless memory caching and disk persistence of your plain old Swift structs. Simply define a model and conform to [Codable](https://developer.apple.com/documentation/swift/codable) – you're ready to use `CodableCache`.
