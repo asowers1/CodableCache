@@ -14,7 +14,7 @@
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 [Carthage]: https://github.com/carthage/carthage
 [Cocoapods]: https://cocoapods.org
-<p/>
+<p>
 
 # 📦📲 CodableCache
 What is `CodableCache`? It's a framework that allows for seamless memory caching and disk persistence of your plain old Swift structs. Simply define a model and conform to [Codable](https://developer.apple.com/documentation/swift/codable) – you're ready to use `CodableCache`.
