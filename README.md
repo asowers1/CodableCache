@@ -3,21 +3,31 @@
 </p>
 
 <br>
-<br>
 
+<p align="center">
+![](https://travis-ci.org/asowers1/CodableCache.svg?branch=master)
 ![Platforms](https://img.shields.io/badge/platforms-iOS%20|%20watchOS%20|%20macOS%20|%20tvOS-blue.svg)
 ![Languages](https://img.shields.io/badge/languages-Swift%204-orange.svg)
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-orange.svg?style=flat)][Carthage]
-[![Cocoapods compatible](https://img.shields.io/badge/Cocoapods-compatible-red.svg
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-green.svg?style=flat)][Carthage]
+[![Cocoapods compatible](https://img.shields.io/badge/Cocoapods-compatible-green.svg
 )][Cocoapods]
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
-
 [Carthage]: https://github.com/carthage/carthage
 [Cocoapods]: https://cocoapods.org
-
+<p/>
 
 # 📦📲 CodableCache
 What is `CodableCache`? It's a framework that allows for seamless memory caching and disk persistence of your plain old Swift structs. Simply define a model and conform to [Codable](https://developer.apple.com/documentation/swift/codable) – you're ready to use `CodableCache`.
+
+# 📋🧐 Features
+
+- [x] Simple to use transparent cache based on keys and generic types
+- [x] Anything that's `Codable` works automatically
+- [x] No serializers to write other than optional custom `Codable` encode/decode
+- [x] Works with images via codable wrapper
+- [x] Easy to integrate into existing workflows
+- [x] backed by battle tested NSCache and NSKeyedArchiver
+- [ ] batteries included - by design, it's up to you to create workflows and handle cache errors
 
 # 🎓📕 Some History
 Codable Cache is a drop in replacement for my [LeanCache](https://github.com/asowers1/LeanCache) framework, which was backed by specifying generic types conforming to `NSCoding`. It afforded workflows like `let x: NSNumber? = Cache<NSNumber>("some interesting key")` and that's still great, but writing serializers for `NSCoding` is a pain. Hence, `CodableCache` was born.
@@ -26,7 +36,7 @@ Codable Cache is a drop in replacement for my [LeanCache](https://github.com/aso
 
 To get started, just import CodableCache, define a model that conforms to codable, and get coding. These are just a few examples of how you could use CodableCache.
 
-##### Create a person manager backed by a persistent cache:
+#### Create a person manager backed by a persistent cache:
 
 ```swift
 import CodableCache
@@ -57,10 +67,23 @@ final class PersonManager {
 
 
 ```
+##### And later use it like so:
+```swift
+let personManager = PersonManager()
 
-##### Cache JSON with confidence:
+personManager.set(value: MyPerson)
+
+if let person = personManager.get() {
+    print(person.age)
+}
+```
+#### Cache JSON with confidence:
 
 ```swift
+
+import CodableCache
+
+//...
 
 struct TestData: Codable {
   let testing: [Int]
@@ -96,7 +119,7 @@ func saveJSON() {
 
 
 
-##### Get your cached JSON for later use:
+#### Get your cached JSON for later use:
 
 
 ```swift
@@ -121,7 +144,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationC
 
 ```
 
-##### Specify a different storage directory:
+#### Specify a different storage directory:
 
 ```swift
 import CodableCache
@@ -137,7 +160,7 @@ let persistentPersonStorage = CodableCache<Person>(key: "myPerson", directory: .
 
 ```
 
-##### Creating a generic cache:
+#### Creating a generic cache:
 
 ```swift
 import CodableCache

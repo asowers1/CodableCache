@@ -1,0 +1,5 @@
+language: swift
+osx_image: xcode9.1
+xcode_project: CodableCache.xcodeproj
+xcode_scheme: CodableCache-iOS
+xcode_sdk: iphonesimulator9.3
