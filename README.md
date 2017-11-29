@@ -199,7 +199,7 @@ Using something heavyweight like CoreData, Realm, or SQLite is often overkill. M
 #### Cocoapods
 
 ```
-pod install CodableCache
+pod 'CodableCache'
 ```
 
 #### Carthage
