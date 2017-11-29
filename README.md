@@ -69,7 +69,7 @@ final class PersonManager {
 ```swift
 let personManager = PersonManager()
 
-personManager.set(value: MyPerson)
+try? personManager.set(value: MyPerson)
 
 if let person = personManager.get() {
     print(person.age)
