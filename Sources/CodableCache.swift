@@ -61,7 +61,7 @@ extension CodableCache {
     }
     
     public func set(value: T) throws {
-        let archivedValue = try! encoder.encode(value)
+        let archivedValue = try encoder.encode(value)
         self.memoryCache.setObject(archivedValue as AnyObject, forKey: self.key.hashValue as AnyObject)
         try self.persistentCache.set(value, forKey: self.key)
     }
