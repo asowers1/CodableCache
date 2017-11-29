@@ -67,7 +67,7 @@ final class PersonManager {
 ```
 ##### And later use it like so:
 ```swift
-let personManager = PersonManager()
+let personManager = PersonManager(cacheKey: "myPerson")
 
 try? personManager.set(value: MyPerson)
 
