@@ -247,6 +247,18 @@ carthage update
 ```
 In your application targets “General” tab under the “Linked Frameworks and Libraries” section, drag and drop CodableCache-iOS.framework from the Carthage/Build/iOS directory that `carthage update` produced.
 
+### Swift Package Manager
+
+The [Swift Package Manager](https://swift.org/package-manager/) is a tool for automating the distribution of Swift code and is integrated into the `swift` compiler. It is in early development, but Alamofire does support its use on supported platforms. 
+
+Once you have your Swift package set up, adding CodableCache as a dependency is as easy as adding it to the `dependencies` value of your `Package.swift`.
+
+
+```swift
+dependencies: [
+    .Package(url: "https://github.com/asowers1/CodableCache.git")
+]
+```
 
 ## 🙋 🙋‍♂️ Contributing
 
