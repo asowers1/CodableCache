@@ -198,27 +198,67 @@ Using something heavyweight like CoreData, Realm, or SQLite is often overkill. M
 
 #### Cocoapods
 
+[CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. You can install it with the following command:
+
+```bash
+$ gem install cocoapods
 ```
-pod 'CodableCache'
+
+> CocoaPods 1.1+ is required to build CodableCache.
+
+To integrate CodableCache into your Xcode project using CocoaPods, specify it in your `Podfile`:
+
+```ruby
+use_frameworks!
+
+target '<Your Target Name>' do
+    pod 'CodableCache'
+end
 ```
+
+Then, run the following command:
+
+```bash
+$ pod install
+```
+
 
 #### Carthage
 
-Get [Carthage](https://github.com/Carthage/Carthage)
+[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks.
 
-Add CodableCache to your Cartfile
+You can install Carthage with [Homebrew](http://brew.sh/) using the following command:
 
+```bash
+$ brew update
+$ brew install carthage
 ```
+
+To integrate CodableCache into your Xcode project using Carthage, specify it in your `Cartfile`:
+
+```ogdl
 github "asowers1/CodableCache" "master"
 ```
 
-run
+Run
 
 ```
 carthage update
 ```
 In your application targets “General” tab under the “Linked Frameworks and Libraries” section, drag and drop CodableCache-iOS.framework from the Carthage/Build/iOS directory that `carthage update` produced.
 
+### Swift Package Manager
+
+The [Swift Package Manager](https://swift.org/package-manager/) is a tool for automating the distribution of Swift code and is integrated into the `swift` compiler. It is in early development, but Alamofire does support its use on supported platforms. 
+
+Once you have your Swift package set up, adding CodableCache as a dependency is as easy as adding it to the `dependencies` value of your `Package.swift`.
+
+
+```swift
+dependencies: [
+    .Package(url: "https://github.com/asowers1/CodableCache.git")
+]
+```
 
 ## 🙋 🙋‍♂️ Contributing
 
