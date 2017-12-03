@@ -10,6 +10,10 @@ import Foundation
 import XCTest
 import CodableCache
 
+protocol TestProtocol: Codable {
+    var foo: Int { get set }
+}
+
 class CodableCacheTests: XCTestCase {
     
     struct TestData: Codable {
@@ -141,6 +145,40 @@ class CodableCacheTests: XCTestCase {
         
         let expectedNilCacheValue = someCache.get()
         XCTAssertNil(expectedNilCacheValue, "The cache value should have been nil for an uninitialized cache")
+    }
+    
+    func testCollection() {
+        
+        final class GenericCache<Cacheable: Codable> {
+            
+            let cache: CodableCache<Cacheable>
+            
+            init(cacheKey: AnyHashable) {
+                self.cache = CodableCache<Cacheable>(key: cacheKey)
+            }
+            
+            func get() -> Cacheable? {
+                return self.cache.get()
+            }
+            
+            func set(value: Cacheable) throws {
+                try self.cache.set(value: value)
+            }
+            
+            func clear() throws {
+                try self.cache.clear()
+            }
+        }
+        
+        struct NounState: Codable {
+            let foo: Bool
+        }
+        
+        let nounStatesCache = GenericCache<[NounState]>(cacheKey: "nounStateCache")
+        
+        try? nounStatesCache.set(value: [NounState(foo: false), NounState(foo: true)])
+        
+        XCTAssert(nounStatesCache.get()![1].foo == true, "should be able to get cached value out of collection")
     }
     
     func testNestedValues() {

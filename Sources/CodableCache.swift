@@ -66,6 +66,12 @@ extension CodableCache {
         try self.persistentCache.set(value, forKey: self.key)
     }
     
+    public func set(value: [T]) throws {
+        let archivedValues = try value.map { try encoder.encode($0) }
+        self.memoryCache.setObject(archivedValues as NSArray, forKey: self.key.hashValue as AnyObject)
+        try self.persistentCache.set(value, forKey: self.key)
+    }
+    
     public func clear() throws {
         self.memoryCache.removeAllObjects()
         try self.persistentCache.clear()

@@ -60,6 +60,12 @@ extension PersistentCache {
         NSKeyedArchiver.archiveRootObject(data, toFile: self.filePathForKey(key))
     }
     
+    public func set(_ value: [T], forKey key: AnyHashable) throws {
+        let encodedValues = try value.map { try encoder.encode($0) }
+        try self.fileManager.createDirectory(at: self.cacheDirectory, withIntermediateDirectories: true, attributes: nil)
+        NSKeyedArchiver.archiveRootObject(encodedValues, toFile: self.filePathForKey(key))
+    }
+    
     public func clear() throws {
         try self.fileManager.removeItem(at: self.cacheDirectory)
     }
