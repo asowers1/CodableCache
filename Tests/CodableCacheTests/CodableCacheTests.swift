@@ -181,6 +181,44 @@ class CodableCacheTests: XCTestCase {
         XCTAssert(nounStatesCache.get()![1].foo == true, "should be able to get cached value out of collection")
     }
     
+    func testCustomDecoder() {
+        struct Foo: Codable {
+            var bar: String? = ""
+            
+            private enum CodingKeys: String, CodingKey {
+                case bar
+            }
+            
+            init(bar: String?) {
+                self.bar = bar
+            }
+            
+            init(from decoder: Decoder) throws {
+                let container = try decoder.container(keyedBy: CodingKeys.self)
+                self.bar = try container.decode(String.self, forKey: .bar)
+            }
+            
+            func encode(to encoder: Encoder) throws {
+                var container = encoder.container(keyedBy: CodingKeys.self)
+                try container.encode(self.bar, forKey: .bar)
+            }
+        }
+        
+        let foo0 = Foo(bar: "Hello World")
+        
+        let foo1 = Foo(bar: nil)
+        
+        let fooCache = CodableCache<Foo>(key: String(describing: Foo.self))
+        
+        try? fooCache.set(value: foo0)
+        
+        XCTAssertNotNil(fooCache.get())
+        
+        try? fooCache.set(value: foo1)
+        
+        XCTAssertNil(fooCache.get())
+    }
+    
     func testNestedValues() {
 
         struct Foo: Codable {

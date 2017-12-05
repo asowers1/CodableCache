@@ -190,6 +190,55 @@ final class GenericCache<Cacheable: Codable> {
 let myCache = GenericCache<MyType>(cacheKey: String(describing: MyType.self))
 ```
 
+## 😓🙃 Gotchas
+
+##### Custom Encoders/Decoders
+Make sure you're decoding as optional if your values are optionally typed
+
+```swift
+    func testCustomDecoder() {
+        struct Foo: Codable {
+            var bar: String? = ""
+            
+            private enum CodingKeys: String, CodingKey {
+                case bar
+            }
+            
+            init(bar: String?) {
+                self.bar = bar
+            }
+            
+            init(from decoder: Decoder) throws {
+                let container = try decoder.container(keyedBy: CodingKeys.self)
+                self.bar = try container.decode(String.self, forKey: .bar)
+            }
+            
+            func encode(to encoder: Encoder) throws {
+                var container = encoder.container(keyedBy: CodingKeys.self)
+                try container.encode(self.bar, forKey: .bar)
+            }
+        }
+        
+        let foo0 = Foo(bar: "Hello World")
+        
+        let foo1 = Foo(bar: nil)
+        
+        let fooCache = CodableCache<Foo>(key: String(describing: Foo.self))
+        
+        try? fooCache.set(value: foo0)
+        // this is not nil because decoder expected `String`
+        XCTAssertNotNil(fooCache.get())
+        
+        try? fooCache.set(value: foo1)
+        // this is nil because decoder expected `String`, but it was given what we'd expect for `String?`
+        XCTAssertNil(fooCache.get())
+    }
+```
+To make the decoder work in this scenario, you would want to decode `Foo.bar` as `String?` like so:
+```swift
+self.bar = try container.decode(String?.self, forKey: .bar)
+```
+
 ## 👩‍🔬 👨‍🎨 Philosophy
 
 Using something heavyweight like CoreData, Realm, or SQLite is often overkill. More often than not we're just backing up some local state based on some JSON interface – using a spaceship for a walk down the block 🚀. Typically, we display this data to the user if it isn't stale and update it from the network if need be. Sorting and reordering is often a server side task, so relational databases and object graphs might be too expensive in terms of upstart modeling and your management time. With `CodableCache` we take a different approach by allowing you to quickly define models, skip boilerplate / serializers, and start saving your data at a lightning pace.
