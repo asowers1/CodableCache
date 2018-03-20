@@ -67,12 +67,16 @@ final class PersonManager {
 ```
 ##### And later use it like so:
 ```swift
+
+var myPerson = Person(name: "Andrew", age: 26)
+
 let personManager = PersonManager(cacheKey: "myPerson")
 
-try? personManager.set(value: MyPerson)
+try? personManager.set(value: myPerson)
 
 if let person = personManager.get() {
-    print(person.age)
+    print(person.name) // "Andrew"
+    print(person.age) // 26
 }
 ```
 #### Cache JSON with confidence:
